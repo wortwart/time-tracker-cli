@@ -1,10 +1,23 @@
 # Tiny Time tracker
-[![NPM](https://nodei.co/npm/time-tracker-cli.png?downloads=true)][npm-home-module]
 
-[![npm version](https://img.shields.io/npm/v/time-tracker-cli.svg?style=flat-square)](https://github.com/danibram/time-tracker-cli)
+## Project State
 
-[![Dependency Status](https://img.shields.io/bithound/dependencies/github/danibram/time-tracker-cli.svg?style=flat-square)](https://www.bithound.io/github/danibram/time-tracker-cli)
-[![Support link][paypal-badge]][paypal-link]
+This CLI time tracker is based on [danibram's work](https://github.com/danibram/time-tracker-cli) and tries to improve on it. Wishlist:
+
+- Daily report (all tasks or only one)
+- Timer status: Is there a timer running? Which task(s)?
+- Date not in UTC, but local timezone
+- Starting a task should stop all others, at least optionally. Default is one task at a time
+- Show a task's raw data
+- Logging acts weird on the console, when no task is running
+- "del x" finds "x" and "x.y", no way to pick only "x"
+- Autocomplete commands (built-in, but cannot make it work) and tasks
+- Can we pause tasks automatically when the computer goes into sleep mode?
+- Data backup
+- Do we need to clean up data? (Performance)
+- Show timer state on desktop or in browser (with an addon)
+
+Okay, I got carried away with the last one.
 
 ## Installation
 
@@ -137,8 +150,3 @@ Run ```npm build``` to build the module.
 
 ## License
 Licensed under the MIT license. 2015
-
-
-[paypal-badge]: https://img.shields.io/badge/❤%20support-paypal-blue.svg?style=flat-square
-[paypal-link]: https://www.paypal.me/danibram
-[npm-home-module]: https://www.npmjs.com/package/time-tracker-cli
