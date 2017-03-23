@@ -2,7 +2,7 @@
 
 ## Project State
 
-This CLI time tracker is based on [danibram's work](https://github.com/danibram/time-tracker-cli) and tries to improve on it. Wishlist:
+This CLI time tracker is based on [danibram's work](https://github.com/danibram/time-tracker-cli) and tries to improve on it (but hasn't done so yet). Wishlist:
 
 - Daily report (all tasks or only one)
 - Timer status: Is there a timer running? Which task(s)?
