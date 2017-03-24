@@ -2,9 +2,14 @@
 
 ## Project State
 
-This CLI time tracker is based on [danibram's work](https://github.com/danibram/time-tracker-cli) and tries to improve on it (but hasn't done so yet). Wishlist:
+This CLI time tracker is based on [danibram's work](https://github.com/danibram/time-tracker-cli) and tries to improve on it. 
 
-- Timer status: Is there a timer running? Which task(s)?
+###Changes:
+
+- Timer status (`status` or `st`): Is there a timer running? Which tasks?
+
+###Wishlist:
+
 - Date not in UTC, but local timezone
 - Starting a task should stop all others, at least optionally. Default is one task at a time
 - Show a task's raw data
