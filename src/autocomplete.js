@@ -1,36 +1,31 @@
 import omelette from 'omelette'
-import { configElements } from './core/constants'
+import {configElements} from './core/constants'
 
-const autocomplete = function(config){
+const autocomplete = function(config) {
 
-    const complete = omelette("timer <cmd> <key>")
+	const complete = omelette("timer <cmd> <key>")
 
-    let allTaskKeys = function() {
-        this.reply(Object.keys(config.all.tasks));
-    }
+	let allTaskKeys = function() {
+		this.reply(Object.keys(config.all.tasks));
+	}
 
-    complete.on("cmd", function() {
-        this.reply(["start", "pause", "unpause", "finish", "description", "add", "subtract", "report", "log", "export", "delete", "configuration", "configure"])
-    });
+	complete.on("cmd", function() {
+		this.reply(["start", "pause", "unpause", "finish", "description", "add", "subtract", "report", "log", "export", "delete", "configuration", "configure"])
+	});
 
-    complete.on("key", function(cmd) {
-        let keyTasks = ['start', 'pause', 'unpause', 'finish', 'log', 'description', 'add', 'remove']
+	complete.on("key", function(cmd) {
+		let keyTasks = ['start', 'pause', 'unpause', 'finish', 'log', 'description', 'add', 'remove']
+		if (keyTasks.indexOf(cmd) > -1)
+			this.reply(Object.keys(config.all.tasks));
+		if (cmd === 'configure')
+			this.reply(configElements);
+	});
 
-        if (keyTasks.indexOf(cmd) > -1){
-            this.reply(Object.keys(config.all.tasks));
-        }
+	complete.init();
 
-        if (cmd === 'configure' ){
-            this.reply(configElements);
-        }
-    });
-
-    complete.init();
-
-    if (~process.argv.indexOf('--setupCLI')) {
-        complete.setupShellInitFile();
-    }
-
+	if (~process.argv.indexOf('--setupCLI')) {
+		complete.setupShellInitFile();
+	}
 }
 
 export default autocomplete

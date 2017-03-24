@@ -4,7 +4,6 @@
 
 This CLI time tracker is based on [danibram's work](https://github.com/danibram/time-tracker-cli) and tries to improve on it (but hasn't done so yet). Wishlist:
 
-- Daily report (all tasks or only one)
 - Timer status: Is there a timer running? Which task(s)?
 - Date not in UTC, but local timezone
 - Starting a task should stop all others, at least optionally. Default is one task at a time
@@ -42,27 +41,27 @@ Usage: timer [options] [command]
 
   Commands:
 
-    start|s <task_key> [description]               Start task with a description.
-    pause|p <task_key>                             Pause task
-    unpause|up <task_key>                          Unpause task
-    finish|f <task_key> [description]              Stop task, you can add a description
-    description|d <task_key> <descriptionText...>  Add description to your task.
-    add <task_key> <stringTime>                    Adds time to a task. Example: "1h2m3s"
-    subtract|sub <task_key> <stringTime>           Subtract time to a task. Example: "1h2m3s"
-    report|r [task_string] [rate]                  Report time of the tasks, empty for select all tasks. Can pass a rate (1h).
-    log|l <task_key>                               Logs the time of the  task
-    export|e                                       Export the tasks in a JSON
-    delete|del [task_string]                       Remove tasks from the list. Empty for select all tasks
-    configure <key> <value>                        Configure the value of the config passing a key
-    configuration                                  Output configuration
+	start|s <task_key> [description]               Start task with a description.
+	pause|p <task_key>                             Pause task
+	unpause|up <task_key>                          Unpause task
+	finish|f <task_key> [description]              Stop task, you can add a description
+	description|d <task_key> <descriptionText...>  Add description to your task.
+	add <task_key> <stringTime>                    Adds time to a task. Example: "1h2m3s"
+	subtract|sub <task_key> <stringTime>           Subtract time to a task. Example: "1h2m3s"
+	report|r [task_string] [rate]                  Report time of the tasks, empty for select all tasks. Can pass a rate (1h).
+	log|l <task_key>                               Logs the time of the  task
+	export|e                                       Export the tasks in a JSON
+	delete|del [task_string]                       Remove tasks from the list. Empty for select all tasks
+	configure <key> <value>                        Configure the value of the config passing a key
+	configuration                                  Output configuration
 
   Tiny time tracker for projects
 
   Options:
 
-    -h, --help     output usage information
-    -V, --version  output the version number
-    --updateDB     Update the db if its neccesary
+	-h, --help     output usage information
+	-V, --version  output the version number
+	--updateDB     Update the db if its neccesary
 ```
 
 - To start a task run:
@@ -89,53 +88,53 @@ If you open you should see:
 
 ```javascript
 {
-    "tasks": {
-        "work1.website.design": {
-            "description": "If you added one",
-            "timings": [{
-                "start": "2016-02-19T10:00:36.393Z",
-                "stop": "2016-02-19T18:01:50.921Z"
-            }],
-            "log": [
-                "start#2016-02-19T10:00:36.393Z",
-                "stop#2016-02-19T18:01:50.921Z"
-            ]
-        },
-        "work1.website.deployServer": {
-            "timings": [{
-                "start": "2016-02-19T10:01:59.116Z",
-                "stop": "2016-02-19T10:32:10.687Z"
-            }],
-            "log": [
-                "start#2016-02-19T10:01:59.116Z",
-                "stop#2016-02-19T10:32:10.687Z"
-            ]
-        },
-        "work2.api.develop.userController": {
-            "timings": [{
-                "start": "2016-02-19T10:04:23.060Z",
-                "stop": "2016-02-19T20:04:36.836Z"
-            }],
-            "log": [
-                "start#2016-02-19T10:04:23.060Z",
-                "stop#2016-02-19T20:04:36.836Z"
-            ]
-        },
-        "work2.api.develop.loginController": {
-            "timings": [{
-                "start": "2016-02-19T10:09:41.848Z",
-                "stop": "2016-02-19T13:11:54.059Z"
-            }],
-            "log": [
-                "start#2016-02-19T10:09:41.848Z",
-                "stop#2016-02-19T13:11:54.059Z"
-            ]
-        }
-    },
-    "config": {
-        "format.output": "DD/MM",
-        "config.version": 2
-    }
+	"tasks": {
+		"work1.website.design": {
+			"description": "If you added one",
+			"timings": [{
+				"start": "2016-02-19T10:00:36.393Z",
+				"stop": "2016-02-19T18:01:50.921Z"
+			}],
+			"log": [
+				"start#2016-02-19T10:00:36.393Z",
+				"stop#2016-02-19T18:01:50.921Z"
+			]
+		},
+		"work1.website.deployServer": {
+			"timings": [{
+				"start": "2016-02-19T10:01:59.116Z",
+				"stop": "2016-02-19T10:32:10.687Z"
+			}],
+			"log": [
+				"start#2016-02-19T10:01:59.116Z",
+				"stop#2016-02-19T10:32:10.687Z"
+			]
+		},
+		"work2.api.develop.userController": {
+			"timings": [{
+				"start": "2016-02-19T10:04:23.060Z",
+				"stop": "2016-02-19T20:04:36.836Z"
+			}],
+			"log": [
+				"start#2016-02-19T10:04:23.060Z",
+				"stop#2016-02-19T20:04:36.836Z"
+			]
+		},
+		"work2.api.develop.loginController": {
+			"timings": [{
+				"start": "2016-02-19T10:09:41.848Z",
+				"stop": "2016-02-19T13:11:54.059Z"
+			}],
+			"log": [
+				"start#2016-02-19T10:09:41.848Z",
+				"stop#2016-02-19T13:11:54.059Z"
+			]
+		}
+	},
+	"config": {
+		"format.output": "DD/MM",
+		"config.version": 2
+	}
 }
 ```
 
