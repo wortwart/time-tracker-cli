@@ -40,20 +40,20 @@ program
 	})
 
 program
-	.command('pause <task_key>')
-	.description('Pause task')
+	.command('pause [task_key]')
+	.description('Pause task(s)')
 	.alias('p')
 	.action(function(key) {
-		manager.pauseTask(key)
+		manager.pauseTasks(key)
 		EXEC = true
 	})
 
 program
-	.command('unpause <task_key>')
-	.description('Unpause task')
+	.command('unpause [task_key]')
+	.description('Unpause task(s)')
 	.alias('up')
 	.action(function(key) {
-		manager.unpauseTask(key)
+		manager.unpauseTasks(key)
 		EXEC = true
 	})
 

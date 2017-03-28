@@ -23,6 +23,37 @@ export default class Manager {
 		return new Task(task)
 	}
 
+	getAllTasks(props) {
+		let myTasks = []
+		if (!props) props = {}
+		Object.keys(this.tasks).forEach(key => {
+			if (props.filter) {
+				let _st = this.tasks[key].status
+				if (props.filter === 'unfinished') {
+					if (_st === FINISHED)
+						return
+				} else if (props.filter === 'running') {
+					if (_st === FINISHED || _st === PAUSED)
+						return
+				} else if (props.filter === 'paused') {
+					if (_st !== PAUSED)
+						return
+				}
+			}
+			if (props.only_key) {
+				myTasks.push(key)
+				return
+			}
+			let _task = {key: key}
+			if (props.status)
+				_task.status = this.tasks[key].status
+			if (props.lastLog)
+				_task.lastLog = this.tasks[key].log[this.tasks[key].log.length - 1]
+			myTasks.push(_task)
+		})
+		return myTasks
+	}
+
 	storeTask(key, task) {
 		let update = {}
 		update[key] = task.get()
@@ -42,6 +73,16 @@ export default class Manager {
 			.catch(cliError)
 	}
 
+	pauseTasks(key) {
+		if (key) {
+			this.pauseTask(key)
+			return
+		}
+		let running_tasks = this.getAllTasks({filter: 'running', only_key: true})
+		running_tasks.forEach(el => this.pauseTask(el))
+		console.log('Pausing', running_tasks.length, 'Task(s)')
+	}
+
 	pauseTask(key) {
 		let t = this.getTask(key)
 		t.pause()
@@ -52,6 +93,16 @@ export default class Manager {
 				)
 			}, cliError)
 			.catch(cliError)
+	}
+
+	unpauseTasks(key) {
+		if (key) {
+			this.unpauseTask(key)
+			return
+		}
+		let paused_tasks = this.getAllTasks({filter: 'paused', only_key: true})
+		paused_tasks.forEach(el => this.unpauseTask(el))
+		console.log('Unpausing', paused_tasks.length, 'Task(s)')
 	}
 
 	unpauseTask(key) {
@@ -181,8 +232,9 @@ export default class Manager {
 	}
 
 	getStatus() {
-		Object.keys(this.tasks).forEach((key) => {
-			console.log(key, this.tasks[key].status, this.tasks[key].log[this.tasks[key].log.length - 1])
+		let keys = this.getAllTasks({view: 'list', status: true, lastLog: true})
+		keys.forEach(el => {
+			console.log(el.key, el.status, el.lastLog)
 		})
 	}
 
