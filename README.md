@@ -2,7 +2,7 @@
 
 ## Project State
 
-This CLI time tracker is based on [danibram's work](https://github.com/danibram/time-tracker-cli) and tries to improve on it. 
+This CLI time tracker is based on [danibram's work](https://github.com/danibram/time-tracker-cli) and tries to improve on it.
 
 ### Changes:
 
@@ -15,16 +15,16 @@ This CLI time tracker is based on [danibram's work](https://github.com/danibram/
 - Starting a task stops all others unless specified with an option
 - Ask if user starts a new task (might be a typo)
 - `f` finishes all running tasks unless specified
-- Filter report by time range doesn't work properly
+- Filter report by time range
 - Date not in UTC, but local timezone
 - Show a task's raw data, optionally filtered by time range
 - Autocomplete commands (built-in, but cannot make it work) and tasks
 - Can we pause tasks automatically when the computer goes into sleep mode?
+- Data clean-up (performance): Calculate sum, label and save it, delete timings
 - Data backup
-- Do we need to clean up data? (Performance)
-- Show timer state on desktop or in browser (with an addon)
 - "del x" finds "x" and "x.y", no way to pick only "x"
 - Logging acts weird on the console when no task is running
+- Show timer state on desktop or in browser (with an addon)
 
 Okay, I got carried away with the last one.
 

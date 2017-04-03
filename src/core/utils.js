@@ -1,4 +1,4 @@
-export const recognizeModifierTiming = function (string) {
+export const recognizeModifierTiming = function(string) {
 	let r = /(\d{1,})([hms])/g
 	let arr
 	let res = []
@@ -11,22 +11,33 @@ export const recognizeModifierTiming = function (string) {
 	return res
 }
 
-export const calcRate = function (rate, total) {
+export const calcRate = function(rate, total) {
 	let amount
 	let mod = rate.substr(rate.length - 1)
 	let value = rate.slice(0, rate.length - 1)
 	switch (mod) {
 		case 'h':
-			amount = (total/60/60)*parseFloat(value)
+			amount = (total/60/60) / parseFloat(value)
 			break;
 		case 'm':
-			amount = (total/60)*parseFloat(value)
+			amount = (total/60) / parseFloat(value)
 			break;
 		case 's':
-			amount = total*parseFloat(value)
+			amount = total / parseFloat(value)
 			break;
 	}
-	return amount.toFixed(2)
+	if (!amount) {
+		console.error('Invalid rate', rate)
+		return
+	}
+	return amount.toFixed(2) + ((value === '1')? mod : ' * ' + rate)
+}
+
+export const calcTime = function(timespan, tasks) {
+	tasks.forEach(el => {
+		console.log(el.task, timespan)
+	})
+	return 'todo ...'
 }
 
 export const humanParseDiff = function(secs) {

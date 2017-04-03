@@ -1,9 +1,9 @@
 import moment from 'moment'
 import Table from 'cli-table'
 import chalk from 'chalk'
-import {humanParseDiff, calcRate} from './utils'
+import {humanParseDiff, calcRate, calcTime} from './utils'
 
-export const summarize = function(search, tasks, rate, full, format) {
+export const summarize = function(args) {
 	let table = new Table({
 		head: ['Duration', 'Dates', 'Task'],
 		chars: {'mid': '', 'left-mid': '', 'mid-mid': '', 'right-mid': ''},
@@ -11,26 +11,28 @@ export const summarize = function(search, tasks, rate, full, format) {
 		style: { head: ['green'] }
 	});
 	let total = 0
-	let head= `Search: ${search} \n`
+	let head = `Search: ${args.search} \n`
 
-	tasks.forEach((task, index) => {
+	args.tasks.forEach((task, index) => {
 		let name = task.name
 		task = task.task
 		let duration = task.getSeconds()
 		total += duration
-		table.push([humanParseDiff(duration), moment(task.getStartDate()).format(format), name])
+		table.push([humanParseDiff(duration), moment(task.getStartDate()).format(args.format), name])
 	})
 
 	console.log(table.toString());
 
-	if (full) {
+	if (args.full) {
 		let table2 = new Table()
 		table2.push(
-			{'Search': ['\"' + search + '\"']},
+			{'Search': ['\"' + args.search + '\"']},
 			{'Total time': [humanParseDiff(total)]}
 		)
-		if (rate)
-			table2.push({ 'Rate': [calcRate(rate, total)] })
+		if (args.rate)
+			table2.push({'Rate': [calcRate(args.rate, total)]})
+		if (args.timespan)
+			table2.push({'Time': [calcTime(args.timespan, args.tasks)]})
 		console.log(table2.toString());
 	}
 }

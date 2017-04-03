@@ -226,9 +226,16 @@ export default class Manager {
 		}
 	}
 
-	summarize(key, rate, full=true) {
-		let tasks = this.search(key)
-		summarize(key, tasks, rate, full, this.config['format.output'])
+	summarize(args) {
+		if (typeof args.full === 'undefined') args.full = true
+		summarize({
+			search: args.key,
+			tasks: this.search(args.key),
+			rate: args.rate,
+			full: args.full,
+			timespan: args.timespan,
+			format: this.config['format.output']
+		})
 	}
 
 	getStatus() {

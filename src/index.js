@@ -82,7 +82,7 @@ program
 	.description('Adds time to a task. Example: "1h2m3s"')
 	.action(function(key, stringTime) {
 		manager.modifyTask('add', key, stringTime)
-		manager.summarize(key, manager.search(key), false)
+		manager.summarize({key: key, rate: manager.search(key), full: false})
 		EXEC = true
 	})
 
@@ -92,7 +92,7 @@ program
 	.alias('sub')
 	.action(function(key, stringTime) {
 		manager.modifyTask('subtract', key, stringTime)
-		manager.summarize(key, manager.search(key), false)
+		manager.summarize({key: key, rate: manager.search(key), full: false})
 		EXEC = true
 	})
 
@@ -102,7 +102,17 @@ program
 	.alias('r')
 	.action(function(tasks, rate) {
 		tasks = (tasks) ? tasks : 'all'
-		manager.summarize(tasks, rate)
+		manager.summarize({key: tasks, rate: rate})
+		EXEC = true
+	})
+
+program
+	.command('summarize [task_string] [timespan]')
+	.description('Summarize time of the tasks, empty for select all tasks. Can pass a timespan (1h).')
+	.alias('sum')
+	.action(function(tasks, timespan) {
+		tasks = (tasks) ? tasks : 'all'
+		manager.summarize({key: tasks, timespan: timespan})
 		EXEC = true
 	})
 
