@@ -33,7 +33,9 @@ export const calcRate = function(rate, total) {
 	return amount.toFixed(2) + ((value === '1')? mod : ' * ' + rate)
 }
 
-export const humanParseDiff = function(secs, noSecOutput) {
+export const humanParseDiff = function(secs, noSecOutput, zeroOutput) {
+	if (!secs)
+		return zeroOutput? '0m' : ''
 	let hours   = Math.floor(secs / 3600)
 	let minutes = Math.floor((secs - (hours * 3600)) / 60)
 	let seconds = secs - (hours * 3600) - (minutes * 60)

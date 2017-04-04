@@ -44,10 +44,13 @@ export const calcTime = function(timespan, tasks) {
 	let results = []
 	let pTimespan = recognizeModifierTiming(timespan)[0]
 	let limit = moment().subtract(pTimespan.value, pTimespan.momentKey)
+	let multipleOutput = (tasks.length > 1)? true : false
 	tasks.forEach(el => {
+		console.log()
 		let checkins = el.task.task.timings.reverse()
 		let sum = 0
 		let overflow = 0
+		let result = ''
 		for (let i = 0; i < checkins.length; i++) {
 			if (moment(checkins[i].stop).isBefore(limit))
 				break
@@ -57,12 +60,14 @@ export const calcTime = function(timespan, tasks) {
 				break
 			}
 		}
-		let result = humanParseDiff(sum, true)
+		if (multipleOutput)
+			result += el.name + '\n'
+		result += humanParseDiff(sum, true, true)
 		if (overflow)
 			result += '\n- ' + humanParseDiff(overflow, true)
 		results.push(result)
 	})
-	return results
+	return results.join('\n\n')
 }
 
 export const outputConfig = function (config) {
