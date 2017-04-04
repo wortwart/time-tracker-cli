@@ -7,7 +7,9 @@ This CLI time tracker is based on [danibram's work](https://github.com/danibram/
 ### Changes:
 
 - Timer status (`status` or `st`): Is there a timer running? Which tasks?
+- `summarize` (or `sum`) `task 12h` calculates the time spent on `task` during the last 12 hours
 - `p` pauses all tasks unless specified, `up` unpauses them
+- Durations can be stated in days (`3d`), weeks (`1w`), and months (`1M`)
 
 ### Wishlist:
 
@@ -15,7 +17,6 @@ This CLI time tracker is based on [danibram's work](https://github.com/danibram/
 - Starting a task stops all others unless specified with an option
 - Ask if user starts a new task (might be a typo)
 - `f` finishes all running tasks unless specified
-- Filter report by time range
 - Date not in UTC, but local timezone
 - Show a task's raw data, optionally filtered by time range
 - Autocomplete commands (built-in, but cannot make it work) and tasks

@@ -20,7 +20,7 @@ export default class Task {
 
 	_modifyTiming(time, operation) {
 		let timing = this.task.timings[this.task.timings.length - 1]
-		if (!timing){
+		if (!timing) {
 			throw (`This task is not started, start it.`)
 		}
 		let newStop = moment(timing.stop)
@@ -101,10 +101,6 @@ export default class Task {
 
 	setStatus(status) {
 		this.task.status = status
-	}
-
-	getStatus() {
-
 	}
 
 	makeOperationOverTime(operation, stringTime) {

@@ -1,7 +1,7 @@
 import moment from 'moment'
 import Table from 'cli-table'
 import chalk from 'chalk'
-import {humanParseDiff, calcRate, calcTime} from './utils'
+import {recognizeModifierTiming, humanParseDiff, calcRate} from './utils'
 
 export const summarize = function(args) {
 	let table = new Table({
@@ -31,10 +31,38 @@ export const summarize = function(args) {
 		)
 		if (args.rate)
 			table2.push({'Rate': [calcRate(args.rate, total)]})
-		if (args.timespan)
-			table2.push({'Time': [calcTime(args.timespan, args.tasks)]})
+		if (args.timespan) {
+			let obj = {}
+			obj['Time (' + args.timespan + ')'] = [calcTime(args.timespan, args.tasks)]
+			table2.push(obj)
+		}
 		console.log(table2.toString());
 	}
+}
+
+export const calcTime = function(timespan, tasks) {
+	let results = []
+	let pTimespan = recognizeModifierTiming(timespan)[0]
+	let limit = moment().subtract(pTimespan.value, pTimespan.momentKey)
+	tasks.forEach(el => {
+		let checkins = el.task.task.timings.reverse()
+		let sum = 0
+		let overflow = 0
+		for (let i = 0; i < checkins.length; i++) {
+			if (moment(checkins[i].stop).isBefore(limit))
+				break
+			sum += moment(checkins[i].stop).diff(checkins[i].start, 's')
+			if (moment(checkins[i].start).isBefore(limit)) {
+				overflow = moment(limit).diff(checkins[i].start, 's')
+				break
+			}
+		}
+		let result = humanParseDiff(sum, true)
+		if (overflow)
+			result += '\n- ' + humanParseDiff(overflow, true)
+		results.push(result)
+	})
+	return results
 }
 
 export const outputConfig = function (config) {
